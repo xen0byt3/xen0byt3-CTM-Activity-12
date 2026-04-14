@@ -26,6 +26,7 @@ By completing this activity, you will:
 	Perform basic threat hunting
 
 Installation / Setup
+
 	Go to the repository
 	Download the files or clone the repo:
 	git clone https://github.com/xen0byt3/xen0byt3-CTM-Activity-12.git
@@ -69,6 +70,7 @@ PART 2: Flag Mode (CTF Challenge)
 	flag{your_answer}
 
 Example:
+
 	flag{auth.log}
 	flag{10}
 	flag{203.0.113.50}
@@ -93,6 +95,7 @@ Investigation outputs
 [Submission Guidelines]
 
 Choose one of the following:
+
 	Option 1 (Recommended)
 		Upload your 
 		log_monitoring_report.txt and flag_monitoring_report.txt to your GitHub repository
@@ -105,6 +108,7 @@ Choose one of the following:
 		flag_monitoring_report.txt
 
 Score and rating
+
 	Scoring System
 	Score	Rating
 	9–10	SOC Analyst
@@ -112,12 +116,14 @@ Score and rating
 	0–5	Trainee
 
 Rules
+
 	Follow instructions carefully
 	Use correct command syntax
 	Analyze before answering
 	No random guessing
 
 Tips
+
 	Look for repeated IP addresses
 	Count failed login attempts
 	Identify which IP succeeded
