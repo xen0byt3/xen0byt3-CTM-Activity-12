@@ -1,0 +1,21 @@
+=== SOC FLAG REPORT ===
+
+Name: Steven Angelo Mahilum
+Cyber Handle: ByteOverseer
+Score: 10/10
+Rating: SOC Analyst
+
+=== USER ANSWERS ===
+Q1: flag{auth.log}
+Q2: flag{10}
+Q3: flag{203.0.113.50,192.168.1.10,10.0.0.5}
+Q4: flag{203.0.113.50}
+Q5: flag{203.0.113.50}
+Q6: flag{yes}
+Q7: grep FLAG auth.log
+Q8: flag{greedisbad}
+Q9: flag{45.33.32.1}
+Q10: flag{203.0.113.50-10-203.0.113.50}
+
+=== RESULT ===
+Status: PASSED (SOC READY)
