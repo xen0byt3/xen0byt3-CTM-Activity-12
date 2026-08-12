@@ -1,0 +1,66 @@
+Press ENTER to continue ...
+You are part of a Security Operations Center (SOC).
+A server was attacked, and sensitive access may have been gained.
+
+Your mission:
+Investigate the logs, track the attacker, and capture hidden flags.
+Each correct answer reveals a FLAG.
+
+
+[1] Start Investigation
+[2] Flag
+[3] Exit
+Select: 1
+
+Please invoke command to show List
+xen0byt3@adoVM:~$ ls
+auth.log
+
+[Initial Log Inspection]
+Please invoke command to view the log
+xen0byt3@adoVM:~$ cat auth.log
+Apr 13 09:00:01 server sshd[1021]: Failed password for root from 192.168.1.10 port 4455 ssh2
+Apr 13 09:00:05 server sshd[1022]: Failed password for root from 192.168.1.10 port 4456 ssh2
+Apr 13 09:00:10 server sshd[1023]: Failed password for admin from 192.168.1.10 port 4457 ssh2
+Apr 13 09:01:15 server sshd[1024]: Failed password for root from 10.0.0.5 port 2233 ssh2
+Apr 13 09:01:20 server sshd[1025]: Failed password for root from 10.0.0.5 port 2234 ssh2
+Apr 13 09:01:25 server sshd[1026]: Failed password for root from 10.0.0.5 port 2235 ssh2
+Apr 13 09:02:00 server sshd[1027]: Accepted password for admin from 192.168.1.5 port 3000 ssh2
+Apr 13 09:02:10 server sshd[1028]: Failed password for root from 203.0.113.50 port 7788 ssh2
+Apr 13 09:02:15 server sshd[1029]: Failed password for root from 203.0.113.50 port 7789 ssh2
+Apr 13 09:02:20 server sshd[1030]: Failed password for root from 203.0.113.50 port 7790 ssh2
+Apr 13 09:02:25 server sshd[1031]: Failed password for root from 203.0.113.50 port 7791 ssh2
+Apr 13 09:03:00 server sshd[1032]: Accepted password for root from 203.0.113.50 port 8800 ssh2
+#FLAG{entry_point_identified}
+
+[Initial Log Inspection]
+Please invoke command to show last 3 activity
+xen0byt3@adoVM:~$ tail -n 3 auth.log
+Apr 13 09:02:25 server sshd[1031]: Failed password for root from 203.0.113.50 port 7791 ssh2
+Apr 13 09:03:00 server sshd[1032]: Accepted password for root from 203.0.113.50 port 8800 ssh2
+#FLAG{entry_point_identified}
+
+[Initial Log Inspection]
+Please invoke command to show first 3 activity
+xen0byt3@adoVM:~$ head -n 3 auth.log
+Apr 13 09:00:01 server sshd[1021]: Failed password for root from 192.168.1.10 port 4455 ssh2
+Apr 13 09:00:05 server sshd[1022]: Failed password for root from 192.168.1.10 port 4456 ssh2
+Apr 13 09:00:10 server sshd[1023]: Failed password for admin from 192.168.1.10 port 4457 ssh2
+
+[Detect Failed Login Attempts]
+Please invoke command to extract all failed
+xen0byt3@adoVM:~$ grep "Failed password" auth.log
+Apr 13 09:00:01 server sshd[1021]: Failed password for root from 192.168.1.10 port 4455 ssh2
+Apr 13 09:00:05 server sshd[1022]: Failed password for root from 192.168.1.10 port 4456 ssh2
+Apr 13 09:00:10 server sshd[1023]: Failed password for admin from 192.168.1.10 port 4457 ssh2
+Apr 13 09:01:15 server sshd[1024]: Failed password for root from 10.0.0.5 port 2233 ssh2
+Apr 13 09:01:20 server sshd[1025]: Failed password for root from 10.0.0.5 port 2234 ssh2
+Apr 13 09:01:25 server sshd[1026]: Failed password for root from 10.0.0.5 port 2235 ssh2
+Apr 13 09:02:10 server sshd[1028]: Failed password for root from 203.0.113.50 port 7788 ssh2
+Apr 13 09:02:15 server sshd[1029]: Failed password for root from 203.0.113.50 port 7789 ssh2
+Apr 13 09:02:20 server sshd[1030]: Failed password for root from 203.0.113.50 port 7790 ssh2
+Apr 13 09:02:25 server sshd[1031]: Failed password for root from 203.0.113.50 port 7791 ssh2
+
+[Detect Failed Login Attempts]
+Please invoke command to count total failed attempts
+xen0byt3@adoVM:~$ 
