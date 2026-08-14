@@ -1,6 +1,6 @@
 === SOC FLAG REPORT ===
 
-Name: joana
+Name: joana
 Cyber Handle: spinachsniffer
 Score: 8/10
 Rating: Junior Analyst

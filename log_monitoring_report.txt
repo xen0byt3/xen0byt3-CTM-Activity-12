@@ -1,3 +1,5 @@
+=== SOC LOG MONITORING REPORT ===
+
 COMMAND: ls
 OUTPUT:
 auth.log
