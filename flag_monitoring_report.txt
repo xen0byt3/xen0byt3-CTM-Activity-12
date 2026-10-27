@@ -1,0 +1,21 @@
+=== SOC FLAG REPORT ===
+
+Name: Alexis
+Cyber Handle: AcuityPatch
+Score: 10/10
+Rating: SOC Analyst
+
+=== USER ANSWERS ===
+Q1: FLAG{auth.log}
+Q2: FLAG{10}
+Q3: FLAG{203.0.113.50-192.168.1.10-10.0.0.5}
+Q4: FLAG{203.0.113.50}
+Q5: FLAG{203.0.113.50}
+Q6: FLAG{YES}
+Q7: grep FLAG auth.log
+Q8: FLAG{GREEDISBAD}
+Q9: FLAG{45.33.32.1}
+Q10: FLAG{203.0.113.50-10-192.168.1.5}
+
+=== RESULT ===
+Status: PASSED (SOC READY)
