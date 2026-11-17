@@ -1,0 +1,96 @@
+=== SOC LOG MONITORING REPORT ===
+
+COMMAND: ls
+OUTPUT:
+auth.log
+----------------------------------------
+COMMAND: cat auth.log
+OUTPUT:
+Apr 13 09:00:01 server sshd[1021]: Failed password for root from 192.168.1.10 port 4455 ssh2
+Apr 13 09:00:05 server sshd[1022]: Failed password for root from 192.168.1.10 port 4456 ssh2
+Apr 13 09:00:10 server sshd[1023]: Failed password for admin from 192.168.1.10 port 4457 ssh2
+Apr 13 09:01:15 server sshd[1024]: Failed password for root from 10.0.0.5 port 2233 ssh2
+Apr 13 09:01:20 server sshd[1025]: Failed password for root from 10.0.0.5 port 2234 ssh2
+Apr 13 09:01:25 server sshd[1026]: Failed password for root from 10.0.0.5 port 2235 ssh2
+Apr 13 09:02:00 server sshd[1027]: Accepted password for admin from 192.168.1.5 port 3000 ssh2
+Apr 13 09:02:10 server sshd[1028]: Failed password for root from 203.0.113.50 port 7788 ssh2
+Apr 13 09:02:15 server sshd[1029]: Failed password for root from 203.0.113.50 port 7789 ssh2
+Apr 13 09:02:20 server sshd[1030]: Failed password for root from 203.0.113.50 port 7790 ssh2
+Apr 13 09:02:25 server sshd[1031]: Failed password for root from 203.0.113.50 port 7791 ssh2
+Apr 13 09:03:00 server sshd[1032]: Accepted password for root from 203.0.113.50 port 8800 ssh2
+#FLAG{entry_point_identified}
+----------------------------------------
+COMMAND: tail -n 3 auth.log
+OUTPUT:
+Apr 13 09:02:25 server sshd[1031]: Failed password for root from 203.0.113.50 port 7791 ssh2
+Apr 13 09:03:00 server sshd[1032]: Accepted password for root from 203.0.113.50 port 8800 ssh2
+#FLAG{entry_point_identified}
+----------------------------------------
+COMMAND: head -n 3 auth.log
+OUTPUT:
+Apr 13 09:00:01 server sshd[1021]: Failed password for root from 192.168.1.10 port 4455 ssh2
+Apr 13 09:00:05 server sshd[1022]: Failed password for root from 192.168.1.10 port 4456 ssh2
+Apr 13 09:00:10 server sshd[1023]: Failed password for admin from 192.168.1.10 port 4457 ssh2
+----------------------------------------
+COMMAND: grep "Failed password" auth.log
+OUTPUT:
+Apr 13 09:00:01 server sshd[1021]: Failed password for root from 192.168.1.10 port 4455 ssh2
+Apr 13 09:00:05 server sshd[1022]: Failed password for root from 192.168.1.10 port 4456 ssh2
+Apr 13 09:00:10 server sshd[1023]: Failed password for admin from 192.168.1.10 port 4457 ssh2
+Apr 13 09:01:15 server sshd[1024]: Failed password for root from 10.0.0.5 port 2233 ssh2
+Apr 13 09:01:20 server sshd[1025]: Failed password for root from 10.0.0.5 port 2234 ssh2
+Apr 13 09:01:25 server sshd[1026]: Failed password for root from 10.0.0.5 port 2235 ssh2
+Apr 13 09:02:10 server sshd[1028]: Failed password for root from 203.0.113.50 port 7788 ssh2
+Apr 13 09:02:15 server sshd[1029]: Failed password for root from 203.0.113.50 port 7789 ssh2
+Apr 13 09:02:20 server sshd[1030]: Failed password for root from 203.0.113.50 port 7790 ssh2
+Apr 13 09:02:25 server sshd[1031]: Failed password for root from 203.0.113.50 port 7791 ssh2
+----------------------------------------
+COMMAND: grep "Failed password" auth.log | wc -l
+OUTPUT:
+10
+----------------------------------------
+COMMAND: grep "Failed password" auth.log | awk '{print $11}'
+OUTPUT:
+192.168.1.10
+192.168.1.10
+192.168.1.10
+10.0.0.5
+10.0.0.5
+10.0.0.5
+203.0.113.50
+203.0.113.50
+203.0.113.50
+203.0.113.50
+----------------------------------------
+COMMAND: grep "Failed password" auth.log | awk '{print $11}' | sort | uniq -c
+OUTPUT:
+3 192.168.1.10
+3 10.0.0.5
+4 203.0.113.50
+----------------------------------------
+COMMAND: grep "Failed password" auth.log | awk '{print $11}' | sort | uniq -c | sort -nr
+OUTPUT:
+4 203.0.113.50
+3 192.168.1.10
+3 10.0.0.5
+----------------------------------------
+COMMAND: grep "Failed password" auth.log | awk '{print $11}' | sort | uniq -c | awk '$1 > 3'
+OUTPUT:
+4 203.0.113.50
+----------------------------------------
+COMMAND: grep "Accepted password" auth.log
+OUTPUT:
+Apr 13 09:02:00 server sshd[1027]: Accepted password for admin from 192.168.1.5 port 3000 ssh2
+Apr 13 09:03:00 server sshd[1032]: Accepted password for root from 203.0.113.50 port 8800 ssh2
+----------------------------------------
+COMMAND: grep "Accepted password" auth.log | awk '{print $11}'
+OUTPUT:
+192.168.1.5
+203.0.113.50
+----------------------------------------
+COMMAND: tail -f auth.log | grep "Failed password"
+OUTPUT:
+Apr 13 09:05:00 server sshd[2000]: Failed password for root from 45.33.32.1
+Apr 13 09:05:01 server sshd[2001]: Failed password for root from 45.33.32.1
+Apr 13 09:05:02 server sshd[2002]: Failed password for root from 45.33.32.1
+----------------------------------------
